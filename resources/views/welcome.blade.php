@@ -25,27 +25,31 @@
         </style>
     </head>
     <body class="antialiased">
-          <button type="button" class="btn btn-primary" id="add_todo">  Add Todo </button>
-          <table class="table table-bordered">
-              <thead>
-                  <th>Sr.no</th>
-                  <th>Name</th>
-                  <th>Action</th>
-              </thead>
-              <tbody id="list_todo">
-                  @foreach($todos as $todo)
-                    <tr id="row_todo_{{ $todo->id}}">
-                        <td>{{ $todo->id}}</td>
-                        <td>{{ $todo->name}}</td>
-                        <td>
-                            <button type="button" id="edit_todo" data-id="{{ $todo->id }}" class="btn btn-sm btn-info ml-1">Edit</button>
+        <div class="container pt-3">
+              <button type="button" class="btn btn-primary" id="add_todo">  Add Todo </button>
+              <table class="table table-bordered mt-3">
+                  <thead class="bg-dark text-white">
+                      <th>Sr.no</th>
+                      <th>Name</th>
+                      <th>Action</th>
+                  </thead>
+                  <tbody id="list_todo">
+                      @foreach($todos as $todo)
+                        <tr id="row_todo_{{ $todo->id}}">
+                            <td width="20">{{ $todo->id}}</td>
+                            <td>{{ $todo->name}}</td>
+                            <td width="150">
+                                <button type="button" id="edit_todo" data-id="{{ $todo->id }}" class="btn btn-sm btn-info ml-1">Edit</button>
 
-                            <button type="button" id="delete_todo" data-id="{{ $todo->id }}" class="btn btn-sm btn-danger ml-1">Delete</button>
-                        </td>
-                    </tr>
-                  @endforeach
-              </tbody>
-          </table>
+                                <button type="button" id="delete_todo" data-id="{{ $todo->id }}" class="btn btn-sm btn-danger ml-1">Delete</button>
+                            </td>
+                        </tr>
+                      @endforeach
+                  </tbody>
+              </table>
+
+
+        </div>
 
           <!-- The Modal -->
           <div class="modal" id="modal_todo">
@@ -85,11 +89,12 @@
 
 
 
-            $("#add_todo").on('click',function(){
-                $("#form_todo").trigger('reset');
-                $("#modal_title").html('Add todo');
-                $("#modal_todo").modal('show');
-            });
+$("#add_todo").on('click',function(){
+    $("#form_todo").trigger('reset');
+    $("#modal_title").html('Add todo');
+    $("#modal_todo").modal('show');
+    $("#id").val("");
+});
 
             $("body").on('click','#edit_todo',function(){
                 var id = $(this).data('id');
@@ -124,9 +129,9 @@
                     type:'POST'
                 }).done(function(res){
                     var row = '<tr id="row_todo_'+ res.id + '">';
-                    row += '<td>' + res.id + '</td>';
+                    row += '<td width="20">' + res.id + '</td>';
                     row += '<td>' + res.name + '</td>';
-                    row += '<td>' + '<button type="button" id="edit_todo" data-id="' + res.id +'" class="btn btn-info btn-sm mr-1">Edit</button>' + '<button type="button" id="delete_todo" data-id="' + res.id +'" class="btn btn-danger btn-sm">Delete</button>' + '</td>';
+                    row += '<td width="150">' + '<button type="button" id="edit_todo" data-id="' + res.id +'" class="btn btn-info btn-sm mr-1">Edit</button>' + '<button type="button" id="delete_todo" data-id="' + res.id +'" class="btn btn-danger btn-sm">Delete</button>' + '</td>';
 
                     if($("#id").val()){
                         $("#row_todo_" + res.id).replaceWith(row);
