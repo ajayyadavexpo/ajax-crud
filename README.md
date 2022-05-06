@@ -23,7 +23,7 @@
 
 
 ## How to run the code
-- git clone https://github.com/AjayYadavAi/laravel-starter.git
+- git clone https://github.com/AjayYadavAi/ajax-crud.git
 - cd laravel-starter
 - cp .env.example `.env`
 - open .env and update DB_DATABASE (database details)
