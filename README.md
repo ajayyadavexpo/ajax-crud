@@ -24,7 +24,7 @@
 
 ## How to run the code
 - git clone https://github.com/AjayYadavAi/ajax-crud.git
-- cd laravel-starter
+- cd ajax-crud
 - cp .env.example `.env`
 - open .env and update DB_DATABASE (database details)
 - run : `composer install`
